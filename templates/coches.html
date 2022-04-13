@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}Pagina de inicio{% endblock %}
+
+{% block content %}
+
+  <h1>Listado de coches</h1>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-success">
+            {{message}}
+          </div>
+      {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+    {% for coche in coches  %}
+    
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title"><a href="{{url_for('coche',coche_id=coche.0)}}" >{{coche.1}}</a></h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{coche.2}}</h6>
+                <a href="{{url_for('editar_coche',coche_id=coche.0)}}" class="card-link">Editar</a>
+                <a href="{{url_for('borrar_coche',coche_id=coche.0)}}" class="card-link">Eliminar</a>
+            </div>
+        </div>
+    
+    {% endfor %}
+
+{% endblock  %}
